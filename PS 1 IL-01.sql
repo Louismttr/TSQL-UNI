@@ -1,4 +1,3 @@
-Create database Hospital
 use Hospital
 
 Create TABLE Poblacion(
@@ -13,7 +12,7 @@ Cod_Pro int foreign key references Provincia(Cod_Pro) not null
 CREATE TABLE Provincia(
 Cod_Pro int primary key not null,
 Nombre_Pro nvarchar(50) not null,
-Cantidad_Pro int not null,
+Cantidad_Pro int not null
 )
 
 CREATE TABLE Medicos(
@@ -46,5 +45,45 @@ Codigo_Postal_Pa int,
 Dirrecion nvarchar(80),
 Cod_Po int foreign  key references Poblacion(Cod_Po),
 Cod_Pro int foreign  key references Provincia(Cod_Pro)
+)
+
+CREATE TABLE Pac_Ingreso(
+Cod_Pa INT FOREIGN KEY REFERENCES Paciente(Cod_Pa) NOT NULL,
+Inf_Med NVARCHAR(70) NOT NULL,
+Inf_Pac NVARCHAR(70) NOT NULL,
+Inf_Area NVARCHAR(70) NOT NULL
+)
+
+CREATE TABLE Egresos(
+Id_Egre INT NOT NULL,
+F_Egre DATETIME NOT NULL,
+AreaS NVARCHAR(80) NOT NULL,
+Cod_Me int foreign  key references Medicos(Cod_Me)
+)
+
+CREATE TABLE Ingresos(
+Cod_Ing INT IDENTITY(1,1) NOT NULL,
+MOTIVO NVARCHAR (80) NOT NULL,
+Fecha_Ing DATETIME NOT NULL,
+Cod_Hab INT FOREIGN KEY REFERENCES Habitaciones(Cod_Hab) NOT NULL,
+Cod_Area INT FOREIGN KEY REFERENCES Area_Clinica(Cod_Area) NOT NULL
+)
+
+CREATE TABLE Area_Clinica(
+Cod_Area INT NOT NULL,
+Descripcion NVARCHAR(80) NOT NULL,
+Nombre_A NVARCHAR (80) NOT NULL
+)
+
+CREATE TABLE Habitaciones(
+Cod_Hab INT NOT NULL,
+Tipo_Hab NVARCHAR(90) NOT NULL,
+Cod_Cama INT FOREIGN KEY REFERENCES Cama(Cod_Cama) NOT NULL
+)
+
+CREATE TABLE Cama(
+Cod_Cama INT NOT NULL,
+No_Cama INT NOT NULL,
+Desc_Cama NVARCHAR(80) NOT NULL
 )
 
