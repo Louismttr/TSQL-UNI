@@ -1,6 +1,6 @@
-CREATE DATABASE Cine_Aguacate
+CREATE DATABASE Cine_3LE
 
-Use Cine_Aguacate
+Use Cine_3LE
 
 CREATE TABLE PaisOrigen(
 Codigo_Pa nvarchar(5) Primary Key,
@@ -28,9 +28,11 @@ PuntuAcep_Ca int,
 puntuaGe_Ca int
 )
 ---Intentando crear una RULER :c
-CREATE RULE Calificacion
+CREATE RULE RG_Calificacion
 AS   
 @PuntuAcep_Ca>= 9 AND @PuntuAcep_Ca >18;
+
+EXEC SP_BINDRULE RG_Calificacion, 'Calificacion.PuntuAcep_Ca'
 
 CREATE TABLE Sala(
 Numero_S nvarchar(10) PRIMARY KEY NOT NULL,
@@ -89,7 +91,7 @@ PaisO_Pe nvarchar(5) FOREIGN  KEY REFERENCES PaisOrigen(Codigo_Pa) NOT NULL,
 TGe_Pe varchar(15) FOREIGN  KEY REFERENCES Genero(ID_Ge) NOT NULL,
 URL_Pe varchar,
 Duracion nvarchar(8),
-AñoP_Pe Date,
+AÃ±oP_Pe Date,
 IdiomaO_Pe varchar(10) FOREIGN  KEY REFERENCES Idioma(ID_Ido) NOT NULL,
 TituloD_Pe nvarchar(10),
 TituloO_Pe nvarchar(10),
